@@ -1,0 +1,13 @@
+用户：小马 小李 小王
+小马：/securityOne/byXiaomaAndXiaowang?username=小马
+小李：/securityTwo/byXiaowangAndXiaoli?username=小李
+         /securityTwo/byXiaoli?username=小李
+小王：/securityOne/byXiaomaAndXiaowang?username=小王
+         /securityTwo/byXiaowangAndXiaoli?username=小王
+
+
+实现说明：
+ 1自定义注解@Security，并加在controller或者方法上
+ 2在Handler类中定义存放拥有访问权限人名的set集合
+ 3在LgDispatcherServlet中，初始化处理器映射器的过程中判断controller上以及方法上是否有注解@Security，并取出@Security中的参数，存入Handler类
+ 4在收到浏览器请求，通过requst获取Handler时通过requst中userName的参数和Handler权限set集合判断是否有访问权限,返回Handler
